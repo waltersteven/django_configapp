@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from mascota.forms import MascotaForm
-
+from mascota.models import Mascota, Vacuna
 # Create your views here.
 def index(request):
     #return HttpResponse("Index")
@@ -16,3 +16,9 @@ def mascota_view(request):
     else:  #cuando sea un get
         form = MascotaForm()
     return render(request, 'mascota/mascota_form.html', {'form': form})
+
+def mascota_list(request):
+    mascota = Mascota.objects.all()  #nos trae todos los ovjetos que están en mascota
+    vacuna = Vacuna.objects.all()
+    contexto = {'mascotas': mascota, 'vacunas': vacuna}
+    return render(request, 'mascota/mascota_list.html', contexto)

@@ -1,0 +1,57 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>Nombre</td>
+            <td>Sexo</td>
+            <td>Edad</td>
+            <td>Fecha de rescate</td>
+            <td>Adoptantes</td>
+        </tr>
+    </thead>
+    <tbody>
+        <h1>Lista de mascotas</h1>
+        {% if mascotas %} <!--Verificar si hay registros en el contexto-->
+        {% for mascota in mascotas %}
+        <tr>
+            <td>{{ mascota.id }}</td>
+            <td>{{ mascota.nombre }}</td>
+            <td>{{ mascota.sexo }}</td>
+            <td>{{ mascota.edad_aproximada }}</td>
+            <td>{{ mascota.fecha_rescate }}</td>
+            <td>{{ mascota.persona.nombre }} {{ mascota.persona.apellidos }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <h1>No hay registros de mascotas</h1>
+        {% endif %}
+    </tbody>
+</table>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>Nombre</td>
+        </tr>
+    </thead>
+    <tbody>
+        <h1>Lista de vacunas</h1>
+        {% if vacunas %}
+        {% for vacuna in vacunas %}
+        <tr>
+            <td>{{ vacuna.id }}</td>
+            <td>{{ vacuna.nombre }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <h1>No hay registros de vacunas</h1>
+        {% endif %}
+    </tbody>
+</table>
+
+{% endblock %}
