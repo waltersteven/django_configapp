@@ -4,6 +4,9 @@ from adopcion.models import Persona
 class Vacuna(models.Model):
     nombre = models.CharField(max_length=50)
 
+    def __str__(self):  #o __unicode__ (para versiones anteriores)
+        return '{}'.format(self.nombre)
+
 class Mascota(models.Model):
     #django ignora la id del motor y usa folio
     nombre = models.CharField(max_length=50)
