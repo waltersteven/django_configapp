@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from mascota.forms import MascotaForm
 from mascota.models import Mascota, Vacuna
+from django.views.generic import ListView, CreateView
+from django.core.urlresolvers import reverse_lazy
+
 # Create your views here.
 def index(request):
     #return HttpResponse("Index")
@@ -40,3 +43,20 @@ def mascota_delete(request, id_mascota):
         mascota.delete()
         return redirect('mascota:mascota_listar')
     return render(request, 'mascota/mascota_delete.html', {'mascota': mascota})
+
+#Vistas basadas en clases: Vistas genéricas donde se aprovecha POO. Creamos nuestras vistas heredando las de Django.
+class MascotaList(ListView):
+    model = Mascota
+    template_name = 'mascota/mascota_list.html'  #especificamos a qué template enviamos el contexto (object_list)
+    #para enviar mas de un model con ListView
+    def get_context_data(self, **kwargs):
+        ctx = super(MascotaList, self).get_context_data(**kwargs)
+        ctx['vacunas'] = Vacuna.objects.all()
+        #And so on for more models
+        return ctx
+
+class MascotaCreate(CreateView):
+    model = Mascota
+    form_class = MascotaForm
+    template_name = 'mascota/mascota_form.html'
+    success_url = reverse_lazy('mascota:mascota_listar')  #con esto hago el redirect
