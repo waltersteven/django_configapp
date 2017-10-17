@@ -18,7 +18,18 @@ def mascota_view(request):
     return render(request, 'mascota/mascota_form.html', {'form': form})
 
 def mascota_list(request):
-    mascota = Mascota.objects.all()  #nos trae todos los ovjetos que están en mascota
-    vacuna = Vacuna.objects.all()
+    mascota = Mascota.objects.all().order_by('id')  #nos trae todos los ovjetos que están en mascota
+    vacuna = Vacuna.objects.all().order_by('id')
     contexto = {'mascotas': mascota, 'vacunas': vacuna}
     return render(request, 'mascota/mascota_list.html', contexto)
+
+def mascota_edit(request, id_mascota):
+    mascota = Mascota.objects.get(id=id_mascota)
+    if request.method == 'GET':
+        form = MascotaForm(instance=mascota)  #le mandamos a form una instancia de mascota
+    else:
+        form = MascotaForm(request.POST, instance=mascota)  #recoge el POST del formulario y su instancia
+        if form.is_valid():
+            form.save()
+        return redirect('mascota:mascota_listar')
+    return render(request, 'mascota/mascota_form.html', {'form': form})
