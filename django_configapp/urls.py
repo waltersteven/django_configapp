@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^mascota/', include('mascota.urls', namespace="mascota")),  #para que incluya el archivo urls de mascota
     url(r'^adopcion/', include('adopcion.urls', namespace="adopcion")),
+    url(r'^usuario/', include('usuario.urls', namespace="usuario")),
 ]
