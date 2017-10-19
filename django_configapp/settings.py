@@ -129,7 +129,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)  #le indicamos donde buscar archivos estaticos
 
 LOGIN_REDIRECT_URL = reverse_lazy('adopcion:solicitud_listar')  #es la ruta de a donde nos vaya a llevar después de loguearse
-
+#para salir de sesion
+LOGOUT_REDIRECT_URL = reverse_lazy('login')
 
 #Para enviar correos
 EMAIL_USE_TLS = True
