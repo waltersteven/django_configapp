@@ -129,3 +129,12 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)  #le indicamos donde buscar archivos estaticos
 
 LOGIN_REDIRECT_URL = reverse_lazy('adopcion:solicitud_listar')  #es la ruta de a donde nos vaya a llevar después de loguearse
+
+
+#Para enviar correos
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'wltrst97@gmail.com'  #correo de donde enviaremos emails
+EMAIL_HOST_PASSWORD = 'wltr/st97'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
