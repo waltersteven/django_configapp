@@ -1,11 +1,17 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.core import serializers
 from mascota.forms import MascotaForm
 from mascota.models import Mascota, Vacuna
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 
+
 # Create your views here.
+def listado(request):
+    lista = serializers.serialize('json', Mascota.objects.all())
+    return HttpResponse(lista, content_type='application/json')
+
 def index(request):
     #return HttpResponse("Index")
     return render(request, 'mascota/index.html')
@@ -48,6 +54,8 @@ def mascota_delete(request, id_mascota):
 class MascotaList(ListView):
     model = Mascota
     template_name = 'mascota/mascota_list.html'  #especificamos a qué template enviamos el contexto (object_list)
+    paginate_by = 2
+
     #para enviar mas de un model con ListView
     def get_context_data(self, **kwargs):
         ctx = super(MascotaList, self).get_context_data(**kwargs)
