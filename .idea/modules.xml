@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/django_configapp.iml" filepath="$PROJECT_DIR$/.idea/django_configapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../runinkarun-config/.idea/runinkarun_config.iml" filepath="$PROJECT_DIR$/../runinkarun-config/.idea/runinkarun_config.iml" />
     </modules>
   </component>
 </project>

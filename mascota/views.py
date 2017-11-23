@@ -51,6 +51,7 @@ def mascota_delete(request, id_mascota):
     return render(request, 'mascota/mascota_delete.html', {'mascota': mascota})
 
 #Vistas basadas en clases: Vistas genéricas donde se aprovecha POO. Creamos nuestras vistas heredando las de Django.
+
 class MascotaList(ListView):
     model = Mascota
     template_name = 'mascota/mascota_list.html'  #especificamos a qué template enviamos el contexto (object_list)
@@ -67,7 +68,7 @@ class MascotaCreate(CreateView):
     model = Mascota
     form_class = MascotaForm
     template_name = 'mascota/mascota_form.html'
-    success_url = reverse_lazy('mascota:mascota_listar')  #con esto hago el redirect
+    success_url = reverse_lazy('mascota:mascota_listar')  #Hacemos el redirect cuando se mande el post correctamente
 
 class MascotaUpdate(UpdateView):
     model = Mascota
